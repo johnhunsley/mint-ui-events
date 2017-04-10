@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     getCurrentLoc: function () {
+      console.log('computed......')
       var loc = navigator.geolocation.getCurrentPosition(function (position) {
         var pos = {
           lat: position.coords.latitude,
