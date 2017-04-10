@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Mint from 'mint-ui'
-import Hello from '@/components/Hello'
 import Login from '@/components/Login'
+import Client from '@/components/Client'
 import Map from '@/components/Map'
 import auth from '../components/auth.js'
 
@@ -26,7 +26,7 @@ export default new Router({
   routes: [
     {path: '/', redirect: '/login'},
     {path: '/login', component: Login},
-    {path: '/hello', component: Hello, beforeEnter: requireAuth},
+    {path: '/client', component: Client, beforeEnter: requireAuth},
     {path: '/map', component: Map, beforeEnter: requireAuth}
   ]
 })
