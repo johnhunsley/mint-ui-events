@@ -4,16 +4,12 @@ export default {
     return localStorage.token
   },
   loggedIn () {
-    return !!this.getCookieToken()
+    return !!localStorage.token
   },
   login (token) {
     localStorage.token = token
   },
   logout () {
     delete localStorage.token
-  },
-  getCookieToken () {
-    console.log(document.cookie)
-    return document.cookie
   }
 }

@@ -4,16 +4,13 @@ import Mint from 'mint-ui'
 import Hello from '@/components/Hello'
 import Login from '@/components/Login'
 import Map from '@/components/Map'
-import VueCookie from 'vue-cookie'
+import auth from '../components/auth.js'
 
 Vue.use(Router)
 Vue.use(Mint)
-Vue.use(VueCookie)
 
 function requireAuth (to, from, next) {
-  var cookie = Vue.cookie.get('access_token')
-  console.log(cookie)
-  if (!Vue.cookie.get('access_token')) {
+  if (!auth.loggedIn()) {
     console.log('not logged in, forwarding to /login')
     next({
       path: '/login'
