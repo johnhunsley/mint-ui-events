@@ -11,23 +11,25 @@
   import auth from './auth.js'
 
   export default {
-    name: 'hello',
+    name: 'client',
     data () {
       return {
       }
     },
     methods: {
       handleClick: function (button) {
+        console.log(auth.getToken())
         this.$http.post('http://localhost:8080/events/', this.createEvent(), {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
           console.log(response.data.access_token)
-          auth.login(response.data.access_token)
+          Toast({
+            message: 'Event created with priority ' + button
+          })
           this.$router.push('/client')
         }, function (response) {
           console.log(response)
-        })
-        console.log(auth.getToken())
-        Toast({
-          message: 'button clicked ' + button
+          Toast({
+            message: 'Error : ' + response
+          })
         })
       },
       createEvent: function () {
