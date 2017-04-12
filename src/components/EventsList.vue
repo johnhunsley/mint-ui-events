@@ -1,18 +1,26 @@
 <template>
-  <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
-    <li v-for="item in list">{{item}}</li>
-  </ul>
+  <mt-tab-container v-model="active">
+    <mt-tab-container-item id="tab-container1">
+      <mt-cell id="tab-container1" @click.native="centerMap(item.hash)" v-for="item in list" :key="item.hash" :title="item.hash"></mt-cell>
+    </mt-tab-container-item>
+    <mt-tab-container-item id="tab-container2">
+      <mt-cell id="tab-container2" @click.native="centerMap(item.hash)" v-for="item in list" :key="item.hash" :title="item.hash">}</mt-cell>
+    </mt-tab-container-item>
+    <mt-tab-container-item id="tab-container3">
+      <mt-cell id="tab-container3" @click.native="centerMap(item.hash)" v-for="item in list" :key="item.hash" :title="item.hash"></mt-cell>
+    </mt-tab-container-item>
+  </mt-tab-container>
 </template>
 
 <script>
-import Vue from 'vue'
-import { InfiniteScroll, Toast } from 'mint-ui'
+import { Toast } from 'mint-ui'
 import auth from './auth.js'
-Vue.use(InfiniteScroll)
 
 export default {
+  name: 'events',
   data () {
     return {
+      active: 'tab-container1',
       list: []
     }
   },
@@ -20,11 +28,15 @@ export default {
     this.loadListItems()
   },
   methods: {
+    centerMap: function (eventId) {
+      console.log('Event item clicked - ' + eventId)
+      this.$router.push('/map/' + encodeURI(eventId))
+    },
     loadListItems: function () {
       console.log(auth.getToken())
       this.$http.get('http://localhost:8080/events/', {headers: {'Authorization': 'Bearer ' + auth.getToken()}, params: {'page': 0, 'size': 10}}).then(function (response) {
         console.log(response)
-        this.list = response.body
+        this.list = response.data.content
       }, function (response) {
         console.log(response)
         Toast({
@@ -65,8 +77,5 @@ export default {
 </script>
 
 <style>
-div {
-  font-family: Arial
-}
 </style>
 

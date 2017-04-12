@@ -1,5 +1,5 @@
 <template>
-  <gmap-map :center="center" :zoom="zoom" style="width: 500px; height: 300px">
+  <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 500px">
     <gmap-marker v-for="m in markers" :key="m.id" :position="m.position" :clickable="true" :draggable="true" @click="center=m.position"></gmap-marker>
   </gmap-map>
 </template>
@@ -14,10 +14,18 @@ Vue.use(VueGoogleMaps, {
 })
 
 export default {
+  props: {
+    event: {
+      type: Object,
+      default () {
+        return null
+      }
+    }
+  },
   data () {
     return {
-      center: {lat: 52.58, lng: -2.5},
       zoom: 9,
+      center: {lat: 52.58, lng: -2.5},
       markers: [{
         id: 1,
         position: {
@@ -29,18 +37,9 @@ export default {
       }]
     }
   },
-  computed: {
-    getCurrentLoc: function () {
-      console.log('computed......')
-      var loc = navigator.geolocation.getCurrentPosition(function (position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-        console.log(pos)
-        return pos
-      })
-      this.center = loc
+  watch: {
+    event: function (val) {
+      this.center = val
     }
   }
 }
