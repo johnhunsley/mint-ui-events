@@ -1,5 +1,5 @@
 <template>
-  <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 500px">
+  <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 100vh">
     <gmap-marker v-for="m in markers" :key="m.id" :position="m.position" :clickable="true" :draggable="true" @click="center=m.position"></gmap-marker>
   </gmap-map>
 </template>
@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       center: { lat: 0, lng: 0 },
-      zoom: 9,
+      zoom: 16,
       markers: [{
         id: 1,
         position: {
@@ -44,6 +44,7 @@ export default {
       var lat = response.data.latitude
       var lng = response.data.longitude
       this.center = {lat: lat, lng: lng}
+      this.markers = [{id: this.eventId, position: {lat: lat, lng: lng}}]
     }, function (response) {
       console.log(response)
     })
@@ -53,7 +54,7 @@ export default {
 <style>
 map {
   width:100%;
-  height: 600px;
-  display: block;
+  min-height:100%;
+  height:100%;
 }
 </style>
