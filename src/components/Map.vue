@@ -6,6 +6,7 @@
 <script>
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import auth from '../components/auth.js'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -15,21 +16,20 @@ Vue.use(VueGoogleMaps, {
 
 export default {
   props: {
-    event: {
-      type: Object,
-      default () {
-        return null
-      }
+    eventId: {
+      type: String,
+      default: ''
     }
   },
   data () {
     return {
+      center: { lat: 0, lng: 0 },
       zoom: 9,
-      center: {lat: 52.58, lng: -2.5},
       markers: [{
         id: 1,
         position: {
-          lat: 52.4, lng: -2.2}
+          lat: 52.4, lng: -2.2
+        }
       },
       {
         id: 2,
@@ -37,10 +37,16 @@ export default {
       }]
     }
   },
-  watch: {
-    event: function (val) {
-      this.center = val
-    }
+  mounted: function () {
+    console.log('routing - ' + this.eventId)
+    this.$http.get('http://localhost:8080/events/' + this.eventId, {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
+      console.log(response)
+      var lat = response.data.latitude
+      var lng = response.data.longitude
+      this.center = {lat: lat, lng: lng}
+    }, function (response) {
+      console.log(response)
+    })
   }
 }
 </script>
