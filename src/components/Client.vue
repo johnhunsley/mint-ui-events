@@ -37,7 +37,9 @@
           console.log(response)
           Toast({
             message: 'Error : ' + response
+
           })
+          this.$router.push('/login')
         })
       },
       createEvent: function (button) {

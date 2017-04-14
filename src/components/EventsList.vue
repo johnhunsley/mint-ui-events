@@ -42,6 +42,7 @@ export default {
         Toast({
           message: 'Error : ' + response
         })
+        this.$router.push('/login')
       })
     },
     loadMore () {
@@ -53,24 +54,6 @@ export default {
         }
         this.loading = false
       }, 2500)
-    },
-    handleClick: function (button) {
-      console.log(auth.getToken())
-      this.$http.post('http://localhost:8080/events/', this.createEvent(), {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
-        console.log(response.data.access_token)
-        Toast({
-          message: 'Event created with priority ' + button
-        })
-        this.$router.push('/client')
-      }, function (response) {
-        console.log(response)
-        Toast({
-          message: 'Error : ' + response
-        })
-      })
-    },
-    createEvent: function () {
-
     }
   }
 }
