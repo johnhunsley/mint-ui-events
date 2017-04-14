@@ -30,11 +30,11 @@ export default {
   methods: {
     centerMap: function (eventId) {
       console.log('Event item clicked - ' + eventId)
-      this.$router.push('/map/' + encodeURI(eventId))
+      this.$router.push('/map/' + encodeURIComponent(eventId))
     },
     loadListItems: function () {
       console.log(auth.getToken())
-      this.$http.get('http://localhost:8080/events/', {headers: {'Authorization': 'Bearer ' + auth.getToken()}, params: {'page': 0, 'size': 10}}).then(function (response) {
+      this.$http.get('http://localhost:8080/events/', {headers: {'Authorization': 'Bearer ' + auth.getToken()}, params: {'page': 0, 'size': 100}}).then(function (response) {
         console.log(response)
         this.list = response.data.content
       }, function (response) {

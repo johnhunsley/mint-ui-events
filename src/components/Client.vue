@@ -25,7 +25,6 @@
     },
     methods: {
       handleClick: function (button) {
-        console.log(auth.getToken())
         this.createEvent(button)
         console.log(this.event)
         this.$http.post('http://localhost:8080/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
@@ -44,29 +43,18 @@
       },
       createEvent: function (button) {
         // set priority according to button
-        if (button === '1') {
-          this.event.priority = 'High'
+        switch (button) {
+          case '1': this.event.priority = 'High'; break
+          case '2': this.event.priority = 'Medium'; break
+          case '3': this.event.priority = 'Low'; break
         }
 
-        if (button === '2') {
-          this.event.priority = 'Medium'
-        }
-
-        if (button === '3') {
-          this.event.priority = 'Low'
-        }
-
-        this.getCurrentLocation()
-      },
-      getCurrentLocation: function () {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          // Get the coordinates of the current position.
-          var lat = position.coords.latitude
-          var lng = position.coords.longitude
-          console.log('lat - ' + lat + ' lng - ' + lng)
-          this.event.longitude = lng
-          this.event.latitude = lat
-        })
+        var gl = navigator.geolocation
+        gl.getCurrentPosition(function (position) {
+          this.event.longitude = position.coords.longitude
+          this.event.latitude = position.coords.latitude
+          console.log('got current loc - ' + this.event.longitude + ':' + this.event.latitude)
+        }.bind(this))
       }
     }
 }

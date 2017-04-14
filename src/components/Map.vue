@@ -39,7 +39,7 @@ export default {
   },
   mounted: function () {
     console.log('routing - ' + this.eventId)
-    this.$http.get('http://localhost:8080/events/' + this.eventId, {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
+    this.$http.get('http://localhost:8080/events/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
       console.log(response)
       var lat = response.data.latitude
       var lng = response.data.longitude
