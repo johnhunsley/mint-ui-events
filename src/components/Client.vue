@@ -14,13 +14,21 @@
     name: 'client',
     data () {
       return {
+        event: {
+          'class': 'Event',
+          'longitude': 0,
+          'latitude': 0,
+          'priority': '',
+          'status': 'Open'
+        }
       }
     },
     methods: {
       handleClick: function (button) {
         console.log(auth.getToken())
-        this.$http.post('http://localhost:8080/events/', this.createEvent(), {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
-          console.log(response.data.access_token)
+        this.createEvent(button)
+        console.log(this.event)
+        this.$http.post('http://localhost:8080/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
           Toast({
             message: 'Event created with priority ' + button
           })
@@ -32,8 +40,22 @@
           })
         })
       },
-      createEvent: function () {
+      createEvent: function (button) {
+        // set priority according to button
+        if (button === '1') {
+          this.event.priority = 'High'
+        }
 
+        if (button === '2') {
+          this.event.priority = 'Medium'
+        }
+
+        if (button === '3') {
+          this.event.priority = 'Low'
+        }
+
+        this.event.longitude = -2.2
+        this.event.latitude = 52.6
       }
     }
 }
