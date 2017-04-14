@@ -56,8 +56,17 @@
           this.event.priority = 'Low'
         }
 
-        this.event.longitude = -2.2
-        this.event.latitude = 52.6
+        this.getCurrentLocation()
+      },
+      getCurrentLocation: function () {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          // Get the coordinates of the current position.
+          var lat = position.coords.latitude
+          var lng = position.coords.longitude
+          console.log('lat - ' + lat + ' lng - ' + lng)
+          this.event.longitude = lng
+          this.event.latitude = lat
+        })
       }
     }
 }
