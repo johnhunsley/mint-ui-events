@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
-    <mt-button size="large" type="danger" @click.native="handleClick('1')">Priority 1 Event</mt-button><br/>
-    <mt-button size="large" type="primary" @click.native="handleClick('2')">Priority 2 Event</mt-button><br/>
-    <mt-button size="large" type="default" @click.native="handleClick('3')">Priority 3 Event</mt-button><br/>
+    <mt-button size="large" type="danger" @click.native="createEvent('1')">Priority 1 Event</mt-button><br/>
+    <mt-button size="large" type="primary" @click.native="createEvent('2')">Priority 2 Event</mt-button><br/>
+    <mt-button size="large" type="default" @click.native="createEvent('3')">Priority 3 Event</mt-button><br/>
   </div>
 </template>
 
@@ -24,23 +24,6 @@
       }
     },
     methods: {
-      handleClick: function (button) {
-        this.createEvent(button)
-        console.log(this.event)
-        this.$http.post('http://localhost:8080/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
-          Toast({
-            message: 'Event created with priority ' + button
-          })
-          this.$router.push('/client')
-        }, function (response) {
-          console.log(response)
-          Toast({
-            message: 'Error : ' + response
-
-          })
-          this.$router.push('/login')
-        })
-      },
       createEvent: function (button) {
         // set priority according to button
         switch (button) {
@@ -54,10 +37,24 @@
           this.event.longitude = position.coords.longitude
           this.event.latitude = position.coords.latitude
           console.log('got current loc - ' + this.event.longitude + ':' + this.event.latitude)
+
+          this.$http.post('http://localhost:8080/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
+            Toast({
+              message: 'Event created with priority ' + button
+            })
+            this.$router.push('/client')
+          }, function (response) {
+            console.log(response)
+            Toast({
+              message: 'Error : ' + response
+
+            })
+            this.$router.push('/login')
+          })
         }.bind(this))
       }
     }
-}
+  }
 </script>
 
 <style>
