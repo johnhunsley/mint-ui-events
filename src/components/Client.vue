@@ -47,7 +47,7 @@
           this.event.latitude = position.coords.latitude
           console.log('got current loc - ' + this.event.longitude + ':' + this.event.latitude)
 
-          this.$http.post('http://localhost:8080/app/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
+          this.$http.post('http://localhost:8080/app/event/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
             Toast({
               message: 'Event created with priority ' + button
             })

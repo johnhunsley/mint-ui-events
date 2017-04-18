@@ -5,6 +5,7 @@ import Mint from 'mint-ui'
 import Login from '@/components/Login'
 import Client from '@/components/Client'
 import EventsList from '@/components/EventsList'
+import Event from '@/components/Event'
 import Map from '@/components/Map'
 import auth from '../components/auth.js'
 
@@ -32,6 +33,7 @@ export default new Router({
     {path: '/client', component: Client, beforeEnter: requireAuth},
     {path: '/events', component: EventsList, beforeEnter: requireAuth},
     {path: '/map', component: Map, beforeEnter: requireAuth},
-    {path: '/map/:eventId', component: Map, beforeEnter: requireAuth, props: true}
+    {path: '/map/:eventId', component: Map, beforeEnter: requireAuth, props: true},
+    {path: '/event/:eventId', component: Event, beforeEnter: requireAuth, props: true}
   ]
 })

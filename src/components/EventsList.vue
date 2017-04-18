@@ -14,27 +14,24 @@
     <div class="page-tab-container">
       <mt-tab-container v-model="active" >
         <mt-tab-container-item id="tab-container1">
-          <mt-cell id="tab-container1" @click.native="centerMap(item.hash)" v-for="item in highList" :key="item.hash" :title="item.hash">
+          <mt-cell id="tab-container1" @click.native="viewEvent(item.hash)" v-for="item in highList" :key="item.hash" :title="item.hash">
             <mt-badge size="small" color="#888">{{item.created}}</mt-badge>
             <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
             <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
-            <mt-button><img src="../assets/map.jpg" height="30" width="30" slot="icon"></mt-button>
           </mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab-container2">
-          <mt-cell id="tab-container2" @click.native="centerMap(item.hash)" v-for="item in mediumList" :key="item.hash" :title="item.hash">
+          <mt-cell id="tab-container2" @click.native="viewEvent(item.hash)" v-for="item in mediumList" :key="item.hash" :title="item.hash">
             <mt-badge size="small" color="#888">{{item.created}}</mt-badge>
             <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
             <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
-            <mt-button><img src="../assets/map.jpg" height="30" width="30" slot="icon"></mt-button>
           </mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab-container3">
-          <mt-cell id="tab-container3" @click.native="centerMap(item.hash)" v-for="item in lowList" :key="item.hash" :title="item.hash">
+          <mt-cell id="tab-container3" @click.native="viewEvent(item.hash)" v-for="item in lowList" :key="item.hash" :title="item.hash">
             <mt-badge size="small" color="#888">{{item.created}}</mt-badge>
-              <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
-              <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
-              <mt-button><img src="../assets/map.jpg" height="30" width="30" slot="icon"></mt-button>
+            <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
+            <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
           </mt-cell>
         </mt-tab-container-item>
       </mt-tab-container>
@@ -60,9 +57,9 @@ export default {
     this.loadListItems()
   },
   methods: {
-    centerMap: function (eventId) {
+    viewEvent: function (eventId) {
       console.log('Event item clicked - ' + eventId)
-      this.$router.push('/map/' + encodeURIComponent(eventId))
+      this.$router.push('/event/' + encodeURIComponent(eventId))
     },
     loadListItems: function () {
       console.log(auth.getToken())
