@@ -4,7 +4,10 @@
       <router-link to="/" slot="left">
         <mt-button icon="back">back</mt-button>
       </router-link>
-      <mt-button @click.native="handleLogout()" slot="right">logout</mt-button>
+      <router-link to="/events" slot="right">
+        <mt-button>Events</mt-button>
+        <mt-button @click.native="handleLogout()">logout</mt-button>
+      </router-link>
     </mt-header><br/>
     <div class="hello">
       <mt-button size="large" type="default" @click.native="createEvent('1')">Priority 1 Event</mt-button><br/>
