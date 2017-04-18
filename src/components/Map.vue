@@ -45,6 +45,12 @@ export default {
       }]
     }
   },
+  methods: {
+    handleLogout: function () {
+      auth.logout()
+      this.$router.push('/login/')
+    }
+  },
   mounted: function () {
     console.log('routing - ' + this.eventId)
     this.$http.get('http://localhost:8080/app/event/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {

@@ -18,6 +18,7 @@
             <mt-badge size="small" color="#888">{{item.created}}</mt-badge>
             <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
             <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
+            <mt-button><img src="../assets/map.jpg" height="30" width="30" slot="icon"></mt-button>
           </mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab-container2">
@@ -25,6 +26,7 @@
             <mt-badge size="small" color="#888">{{item.created}}</mt-badge>
             <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
             <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
+            <mt-button><img src="../assets/map.jpg" height="30" width="30" slot="icon"></mt-button>
           </mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="tab-container3">
@@ -32,6 +34,7 @@
             <mt-badge size="small" color="#888">{{item.created}}</mt-badge>
               <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
               <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
+              <mt-button><img src="../assets/map.jpg" height="30" width="30" slot="icon"></mt-button>
           </mt-cell>
         </mt-tab-container-item>
       </mt-tab-container>
