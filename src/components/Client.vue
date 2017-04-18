@@ -1,9 +1,18 @@
 <template>
-  <div class="hello">
-    <mt-button size="large" type="danger" @click.native="createEvent('1')">Priority 1 Event</mt-button><br/>
-    <mt-button size="large" type="primary" @click.native="createEvent('2')">Priority 2 Event</mt-button><br/>
-    <mt-button size="large" type="default" @click.native="createEvent('3')">Priority 3 Event</mt-button><br/>
+  <div>
+    <mt-header title="Client View">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">back</mt-button>
+      </router-link>
+      <mt-button @click.native="handleLogout()" slot="right">logout</mt-button>
+    </mt-header><br/>
+    <div class="hello">
+      <mt-button size="large" type="default" @click.native="createEvent('1')">Priority 1 Event</mt-button><br/>
+      <mt-button size="large" type="default" @click.native="createEvent('2')">Priority 2 Event</mt-button><br/>
+      <mt-button size="large" type="default" @click.native="createEvent('3')">Priority 3 Event</mt-button><br/>
+    </div>
   </div>
+
 </template>
 
   <script>
@@ -38,7 +47,7 @@
           this.event.latitude = position.coords.latitude
           console.log('got current loc - ' + this.event.longitude + ':' + this.event.latitude)
 
-          this.$http.post('http://localhost:8080/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
+          this.$http.post('http://localhost:8080/app/events/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
             Toast({
               message: 'Event created with priority ' + button
             })
@@ -52,6 +61,10 @@
             this.$router.push('/login')
           })
         }.bind(this))
+      },
+      handleLogout: function () {
+        auth.logout()
+        this.$router.push('login/')
       }
     }
   }

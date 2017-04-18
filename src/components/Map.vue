@@ -1,7 +1,15 @@
 <template>
-  <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 100vh">
-    <gmap-marker v-for="m in markers" :key="m.id" :position="m.position" :clickable="true" :draggable="true" @click="center=m.position"></gmap-marker>
-  </gmap-map>
+  <div>
+    <mt-header title="Service Provider View">
+      <router-link to="/events" slot="left">
+        <mt-button icon="back">back</mt-button>
+      </router-link>
+      <mt-button @click.native="handleLogout()" slot="right">logout</mt-button>
+    </mt-header><br/>
+    <gmap-map :center="center" :zoom="zoom" style="width:100%; height: 100vh">
+      <gmap-marker v-for="m in markers" :key="m.id" :position="m.position" :clickable="true" :draggable="true" @click="center=m.position"></gmap-marker>
+    </gmap-map>
+  </div>
 </template>
 <script>
 import Vue from 'vue'
@@ -39,7 +47,7 @@ export default {
   },
   mounted: function () {
     console.log('routing - ' + this.eventId)
-    this.$http.get('http://localhost:8080/events/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
+    this.$http.get('http://localhost:8080/app/event/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
       console.log(response)
       var lat = response.data.latitude
       var lng = response.data.longitude
