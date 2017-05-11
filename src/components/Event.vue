@@ -7,7 +7,7 @@
       <mt-button @click.native="handleLogout()" slot="right">logout</mt-button>
     </mt-header><br/>
     <mt-cell title="ID" :value="event.hash"></mt-cell>
-    <mt-cell title="Created" :value="event.created"></mt-cell>
+    <mt-cell title="Created" :value="event.createdDate"></mt-cell>
     <mt-cell title="Client ID" :value="event.user"></mt-cell>
     <mt-cell title="Client First Name" :value="event.firstName"></mt-cell>
     <mt-cell title="Client Last Name" :value="event.lastName"></mt-cell>
