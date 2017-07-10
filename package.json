@@ -10,6 +10,8 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "EventEmitter": "^1.0.0",
+    "auth0-js": "^8.8.0",
     "marker-clusterer-plus": "^2.1.4",
     "mint-ui": "^2.2.0",
     "vue": "^2.2.2",
