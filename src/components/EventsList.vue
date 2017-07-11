@@ -25,7 +25,7 @@
 
 <script>
 import { Toast } from 'mint-ui'
-import auth from './auth.js'
+import AuthService from './AuthService.js'
 
 export default {
   name: 'events',
@@ -44,9 +44,9 @@ export default {
       this.$router.push('/event/' + encodeURIComponent(eventId))
     },
     loadListItems: function () {
-      console.log(auth.getToken())
+      console.log(localStorage.getItem('id_token'))
 
-      this.$http.get('http://localhost:8080/app/events/', {headers: {'Authorization': 'Bearer ' + auth.getToken()}, params: {'page': 0, 'size': 10}}).then(function (response) {
+      this.$http.get('http://localhost:8080/app/events/', {headers: {'Authorization': 'Bearer ' + localStorage.getItem('id_token')}, params: {'page': 0, 'size': 10}}).then(function (response) {
         console.log(response)
         this.list = response.data.content
       }, function (response) {
@@ -58,8 +58,9 @@ export default {
       })
     },
     handleLogout: function () {
+      const auth = new AuthService()
       auth.logout()
-      this.$router.push('login/')
+      this.$router.push('./')
     },
     loadMore () {
       this.loading = true

@@ -9,8 +9,7 @@ export default {
   name: 'callback',
   props: ['auth'],
   data () {
-    this.auth.handleAuthentication()
-    this.$router.push('/client')
+    this.auth.handleAuthentication(this.$router)
     return {}
   }
 }

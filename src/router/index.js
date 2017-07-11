@@ -18,14 +18,10 @@ Vue.use(Mint)
 const auth = new AuthService()
 
 function requireAuth (to, from, next) {
-  console.log('requires auth')
-
   if (!auth.isAuthenticated()) {
-    alert('not logged in, forwarding to /login')
     auth.login()
     next()
   } else {
-    console.log('logged in, forwarding to next()')
     next()
   }
 }
@@ -33,7 +29,7 @@ function requireAuth (to, from, next) {
 export default new Router({
   mode: 'history',
   routes: [
-    {path: '/', redirect: '/login'},
+    {path: '/', redirect: '/client'},
     {path: '/login', component: Login},
     {path: '/callback', component: Callback, props: {auth}},
     {path: '/client', component: Client, beforeEnter: requireAuth},
