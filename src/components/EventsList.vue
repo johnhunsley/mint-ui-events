@@ -44,9 +44,9 @@ export default {
       this.$router.push('/event/' + encodeURIComponent(eventId))
     },
     loadListItems: function () {
-      console.log(localStorage.getItem('id_token'))
+      console.log(localStorage.getItem('access_token'))
 
-      this.$http.get('http://localhost:8080/app/events/', {headers: {'Authorization': 'Bearer ' + localStorage.getItem('id_token')}, params: {'page': 0, 'size': 10}}).then(function (response) {
+      this.$http.get('http://localhost:8080/app/events/', {headers: {'Authorization': 'Bearer ' + localStorage.getItem('access_token')}, params: {'page': 0, 'size': 10}}).then(function (response) {
         console.log(response)
         this.list = response.data.content
       }, function (response) {

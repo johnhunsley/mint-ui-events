@@ -21,9 +21,9 @@ export default {
   methods: {
     authenticate: function () {
       console.log('authenticating ' + this.uname)
-      var body = 'grant_type=password&username=' + this.uname + '&password=' + this.pword
+      var body = 'grant_type=password&username=' + this.uname + '&password=' + this.pword + 'audience=http://localhost:8080/events&scope=openid&client_id=VYoe_PnqLCViw25NigT8MUfZFcTYpDE8&client_secret=ggwTcidEN93Ors1im2wQBVp63_kO94e16PFzHq9OqY7sL2MyPyjPA_RMa4c9Mnrw'
 
-      this.$http.post('http://localhost:8080/oauth/token', body,
+      this.$http.post('https://johnhunsley.eu.auth0.com/oauth/token', body,
         {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function (response) {
           console.log(response.data.access_token)
           auth.login(response.data.access_token)
