@@ -54,7 +54,7 @@ export default {
         Toast({
           message: 'Error : ' + response
         })
-        this.$router.push('/login')
+        this.$router.push('/events')
       })
     },
     handleLogout: function () {

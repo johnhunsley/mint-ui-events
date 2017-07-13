@@ -14,7 +14,7 @@
 <script>
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import auth from '../components/auth.js'
+import AuthService from './AuthService.js'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -47,13 +47,14 @@ export default {
   },
   methods: {
     handleLogout: function () {
+      const auth = new AuthService()
       auth.logout()
-      this.$router.push('/login/')
+      this.$router.push('./')
     }
   },
   mounted: function () {
     console.log('routing - ' + this.eventId)
-    this.$http.get('http://localhost:8080/app/event/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
+    this.$http.get('http://localhost:8080/app/event/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + localStorage.getItem('access_token')}}).then(function (response) {
       console.log(response)
       var lat = response.data.latitude
       var lng = response.data.longitude

@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import auth from '../components/auth.js'
+import AuthService from './AuthService.js'
 export default {
   props: {
     eventId: {
@@ -43,8 +43,9 @@ export default {
   },
   methods: {
     handleLogout: function () {
+      const auth = new AuthService()
       auth.logout()
-      this.$router.push('/login/')
+      this.$router.push('./')
     },
     centerMap: function () {
       console.log('Map icon clicked - ' + this.eventId)
@@ -53,7 +54,7 @@ export default {
   },
   mounted: function () {
     console.log('routing - ' + this.eventId)
-    this.$http.get('http://localhost:8080/app/event/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + auth.getToken()}}).then(function (response) {
+    this.$http.get('http://localhost:8080/app/event/' + encodeURIComponent(this.eventId), {headers: {'Authorization': 'Bearer ' + localStorage.getItem('access_token')}}).then(function (response) {
       console.log(response)
       this.event = response.data
     }, function (response) {

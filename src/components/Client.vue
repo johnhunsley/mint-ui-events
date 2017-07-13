@@ -15,12 +15,11 @@
       <mt-button size="large" type="default" @click.native="createEvent('3')">Priority 3 Event</mt-button><br/>
     </div>
   </div>
-
 </template>
 
   <script>
   import { Toast } from 'mint-ui'
-  import auth from './auth.js'
+  import AuthService from './AuthService.js'
 
   export default {
     name: 'client',
@@ -50,7 +49,7 @@
           this.event.latitude = position.coords.latitude
           console.log('got current loc - ' + this.event.longitude + ':' + this.event.latitude)
 
-          this.$http.post('http://localhost:8080/app/event/', this.event, {headers: {'Authorization': 'Bearer ' + auth.getToken(), 'Content-Type': 'application/json'}}).then(function (response) {
+          this.$http.post('http://localhost:8080/app/event/', this.event, {headers: {'Authorization': 'Bearer ' + localStorage.getItem('access_token'), 'Content-Type': 'application/json'}}).then(function (response) {
             Toast({
               message: 'Event created with priority ' + button
             })
@@ -66,8 +65,9 @@
         }.bind(this))
       },
       handleLogout: function () {
+        const auth = new AuthService()
         auth.logout()
-        this.$router.push('login/')
+        this.$router.push('./')
       }
     }
   }
