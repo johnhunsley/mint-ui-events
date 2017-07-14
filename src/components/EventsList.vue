@@ -25,7 +25,7 @@
 
 <script>
 import { Toast } from 'mint-ui'
-import AuthService from './AuthService.js'
+import AuthService from './AuthenticationService.js'
 
 export default {
   name: 'events',

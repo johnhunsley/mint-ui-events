@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-import AuthService from './AuthService.js'
+import AuthService from './AuthenticationService.js'
 export default {
   props: {
     eventId: {

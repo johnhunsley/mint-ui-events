@@ -14,7 +14,7 @@
 <script>
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import AuthService from './AuthService.js'
+import AuthService from './AuthenticationService.js'
 
 Vue.use(VueGoogleMaps, {
   load: {
