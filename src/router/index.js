@@ -28,7 +28,7 @@ function requireAuth (to, from, next) {
 export default new Router({
   mode: 'history',
   routes: [
-    {path: '/', redirect: '/client'},
+    {path: '/', redirect: '/callback'},
     {path: '/callback', component: Callback, props: {auth}},
     {path: '/client', component: Client, beforeEnter: requireAuth},
     {path: '/events', component: EventsList, beforeEnter: requireAuth},

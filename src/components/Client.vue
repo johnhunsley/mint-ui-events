@@ -5,7 +5,7 @@
         <mt-button icon="back">back</mt-button>
       </router-link>
       <router-link to="/events" slot="right">
-        <mt-button>Events</mt-button>
+        <mt-button>Events</mt-button>&nbsp;&nbsp;&nbsp;&nbsp;
         <mt-button @click.native="handleLogout()">logout</mt-button>
       </router-link>
     </mt-header><br/>
@@ -60,7 +60,7 @@
               message: 'Error : ' + response
 
             })
-            this.$router.push('/login')
+            this.$router.push('/')
           })
         }.bind(this))
       },

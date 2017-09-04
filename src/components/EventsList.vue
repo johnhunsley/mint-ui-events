@@ -13,7 +13,7 @@
             <mt-badge v-if="item.priority === 'High'" type="error" size="small" >{{item.priority}}</mt-badge>
             <mt-badge v-if="item.priority === 'Medium'" type="warning" size="small" >{{item.priority}}</mt-badge>
             <mt-badge v-if="item.priority === 'Low'" type="primary" size="small" >{{item.priority}}</mt-badge>
-            <mt-badge size="small" color="#888">{{item.createdDate}}</mt-badge>
+            <mt-badge size="small" color="#888">{{item.createdDate | formatDate}}</mt-badge>
             <mt-badge v-if="item.status === 'Open'" type="success" size="small" >{{item.status}}</mt-badge>
             <mt-badge v-if="item.status === 'Closed'" type="warning" size="small" >{{item.status}}</mt-badge>
           </mt-cell>
@@ -26,6 +26,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import AuthService from './AuthenticationService.js'
+import moment from 'moment'
 
 export default {
   name: 'events',
@@ -33,6 +34,13 @@ export default {
     return {
       active: 'tab-container1',
       list: []
+    }
+  },
+  filters: {
+    formatDate: function (value) {
+      if (value) {
+        return moment(String(value)).format('MM/DD/YYYY hh:mm')
+      }
     }
   },
   mounted: function () {

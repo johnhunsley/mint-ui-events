@@ -9,7 +9,13 @@ export default {
   name: 'callback',
   props: ['auth'],
   data () {
-    this.auth.handleAuthentication(this.$router)
+    var url = window.location.href
+
+    if (url.includes('#')) {
+      this.auth.handleAuthentication(this.$router)
+    } else {
+      this.auth.login()
+    }
     return {}
   }
 }
